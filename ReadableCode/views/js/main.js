@@ -500,7 +500,7 @@ function updatePositions() {
     var mod = i % 5;
     var ph;
     ph = phase[mod]; //Phase computation moved outside so Math.sin is not called over and over again
-    items[i].style.transform = 'translate(' + (items[i].basicLeft + 100) * ph + 'px, 0px)'; //Using style.transform instead of changing the left property
+    items[i].style.transform = 'translateX(' + (items[i].basicLeft + 100) * ph + 'px, 0px)'; //Using style.transform instead of changing the left property
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.

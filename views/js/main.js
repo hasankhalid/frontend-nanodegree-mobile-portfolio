@@ -500,7 +500,7 @@ function updatePositions() {
     var mod = i % 5;
     var ph;
     ph = phase[mod]; //Phase computation moved outside so Math.sin is not called over and over again
-    items[i].style.transform = 'translate(' + (items[i].basicLeft + 100) * ph + 'px, 0px)'; //Using style.transform instead of changing the left property
+    items[i].style.transform = 'translateX(' + 100 * ph + 'px)'; //Using style.transform instead of changing the left property
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -521,13 +521,17 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', window.requestAnimationFrame(function() {
   var cols = 8;
   var s = 256;
+  height = window.screen.height;
+  var rows = height / s;
+  var reqPizzas = rows*cols;
   var movPizzas = document.getElementById("movingPizzas1")
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < reqPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';   //Same CSS properties have been moved to inlined CSS in Pizza.html
     elem.src = "images/pizza.png";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    elem.style.left = (i % cols) * s + 'px';
     movPizzas.appendChild(elem); //getElementById moved outside to reduce duplicate computation.
   }
   window.requestAnimationFrame(updatePositions); //Use RAF to optimize FPS
